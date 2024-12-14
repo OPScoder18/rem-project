@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Interface Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar Toggle Button (Visible on Mobile) -->
+  <button class="toggle-sidebar-btn">☰</button>
+<BR>
+    <BR>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>App Name</h2>
+      </div>
+      <ul class="chat-list">
+        <li>Best Model Aggregator</li>
+        <li>Twitter Template</li>
+        <li>Input Template Creation</li>
+        <!-- Add more list items as needed -->
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <h1>Poe</h1>
+        <button class="create-bot-btn">Create Bot</button>
+      </header>
+
+      <div class="bot-selection">
+        <input type="text" placeholder="Start a new chat" class="chat-input">
+        <div class="bot-options">
+          <div class="bot-option">Assistant</div>
+          <div class="bot-option">Claude-3-Haiku</div>
+          <div class="bot-option">Claude-2-100k</div>
+          <!-- Add more bot options as needed -->
+        </div>
+      </div>
+
+      <section class="official-bots">
+        <h2>Official Bots</h2>
+        <div class="bot-grid">
+          <div class="bot-card">Assistant</div>
+          <div class="bot-card">Web-Search</div>
+          <div class="bot-card">Claude-3-Sonnet</div>
+          <div class="bot-card">Claude-3-Haiku</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Inline JavaScript for Sidebar Toggle -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggleButton = document.querySelector('.toggle-sidebar-btn');
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+    
+      toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+        mainContent.classList.toggle('expanded');
+      });
+    });
+    </script>
+    
+</body>
+</html>

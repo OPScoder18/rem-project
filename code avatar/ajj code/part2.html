@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Cards & Email Verification</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .layout-section {
+            width: 100%;
+            background: linear-gradient(135deg, #4b0f8a, #d55086);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            padding: 20px;
+        }
+
+        .layout-section h1 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            width: 250px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .card img {
+            width: 30px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card:first-child {
+            margin-top: 20px;
+        }
+
+        .verify-section {
+            width: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .verify-section img {
+            margin-bottom: 20px;
+        }
+
+        .verify-section h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .verify-section p {
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-container input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .verify-btn {
+            margin-top: 20px;
+            background-color: #e02525;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .verify-btn:hover {
+            background-color: #c41f1f;
+        }
+
+        .timer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                flex-direction: row;
+            }
+
+            .layout-section {
+                width: 50%;
+                padding: 10px;
+            }
+
+            .card-container {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .card {
+                position: static;
+                margin: 0;
+            }
+
+            .verify-section {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Layout Section -->
+    <div class="layout-section">
+        <h1>Layout Cards</h1>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://flagcdn.com/w320/us.png" alt="USA">
+                <h3>USA</h3>
+                <p>Branches</p>
+                <p>XYZ Inc.<br>Nulltown, Buglandia, 500 0xDEADBEE</p>
+            </div>
+            <div class="card">
+                <img src="https://flagcdn.com/w320/sg.png" alt="Singapore">
+                <h3>Singapore</h3>
+                <p>Head Office</p>
+                <p>XYZ Pvt. Ltd.<br>Road to nowhere, 06-404, 500 Internal Error</p>
+            </div>
+            <div class="card">
+                <img src="https://flagcdn.com/w320/hk.png" alt="Hong Kong">
+                <h3>Hong Kong</h3>
+                <p>Branches</p>
+                <p>XYZ Pte. Ltd.<br>The Infinite Loop Office, 404 Timeout Plaza</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification Section -->
+    <div class="verify-section">
+        <img src="https://via.placeholder.com/150x50?text=Logoipsum" alt="Logoipsum">
+        <h2>Verify your Email</h2>
+        <p>Please enter the 6 digit code we just sent to <b>s*********a@xyz.com</b></p>
+        <div class="input-container">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+        </div>
+        <button class="verify-btn">Verify</button>
+        <p class="timer">Wait 1:39 seconds before requesting a new code.</p>
+        <div class="footer">
+            By continuing, you're agreeing to Nobody's <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookie Policy</a>.
+        </div>
+    </div>
+
+</body>
+</html>

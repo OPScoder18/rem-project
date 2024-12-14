@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatIQ - Chat View</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background Gradient */
+        body {
+            background: linear-gradient(135deg, #d9a7c7, #fffcdc);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1em;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 400px;
+            background: #fff;
+            padding: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .back-icon,
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Chat Content */
+        .chat-content {
+            margin-bottom: 2em;
+        }
+
+        .chat-content h1 {
+            font-size: 1.6em;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+
+        .chat-content p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Chat Bubble */
+        .chat-bubble {
+            background-color: #f0f0f0;
+            padding: 1em;
+            border-radius: 15px;
+            margin-top: 1em;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        /* More Details Button */
+        .more-details {
+            display: block;
+            background: #ddd;
+            padding: 0.5em 1em;
+            border-radius: 15px;
+            text-align: center;
+            margin: 1em 0;
+            color: #555;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        /* Footer Input */
+        .footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            position: sticky;
+            bottom: 0;
+            background: #fff;
+            padding: 1em;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer input {
+            flex: 1;
+            padding: 0.8em;
+            border: none;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            font-size: 0.9em;
+            outline: none;
+        }
+
+        .send-button {
+            background-color: #333;
+            color: #fff;
+            padding: 0.7em 1em;
+            border-radius: 50%;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1em;
+            }
+
+            .chat-content h1 {
+                font-size: 1.4em;
+            }
+
+            .chat-bubble {
+                font-size: 0.9em;
+            }
+
+            .footer input {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <span class="back-icon">←</span>
+            <h2>ChatIQ</h2>
+            <span class="menu-icon">☰</span>
+        </div>
+
+        <!-- Chat Content -->
+        <div class="chat-content">
+            <h1>Explain the Sushi roll recipe</h1>
+            <div class="chat-bubble">
+                <strong>ChatIQ</strong>
+                <p>Create a personal webpage for me, all in a single file. Ask me 3 questions first on whatever you need to know.</p>
+            </div>
+            <p>To create a personal webpage for you, here are three questions:</p>
+            <p>1. What is the main purpose of your personal webpage? (e.g., portfolio, blog, resume, contact information)</p>
+            <p>2. What style and color scheme do you prefer? (e.g., minimalist, modern, professional; specific colors or themes)</p>
+            <p>3. What specific sections or content do you want to include? (e.g., About Me, Projects, Skills, Contact Form, Social Media Links)</p>
+            <p>Once I have this information, I can create the webpage for you!</p>
+            <span class="more-details">More Details...</span>
+        </div>
+
+        <!-- Footer Input -->
+        <div class="footer">
+            <input type="text" placeholder="Ask anything here...">
+            <div class="send-button">➤</div>
+        </div>
+    </div>
+</body>
+</html>

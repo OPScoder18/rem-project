@@ -1,0 +1,257 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    width: 300px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%); /* Hide sidebar by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .sidebar.show {
+    transform: translateX(0); /* Show sidebar when .show class is added */
+  }
+  
+  .sidebar-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .chat-list li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+  }
+  
+  .chat-list li:hover {
+    background-color: #333;
+  }
+  
+  /* Main content */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 300px; /* Space for sidebar */
+    transition: margin-left 0.3s ease;
+  }
+  
+  .main-content.expanded {
+    margin-left: 0; /* Full width when sidebar is hidden */
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+  }
+  
+  .create-bot-btn {
+    padding: 8px 16px;
+    background-color: #333;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .create-bot-btn:hover {
+    background-color: #444;
+  }
+  
+  .bot-selection {
+    margin-top: 20px;
+  }
+  
+  .chat-input {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .bot-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .bot-option {
+    padding: 8px 16px;
+    background-color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .bot-option:hover {
+    background-color: #555;
+  }
+  
+  .official-bots {
+    margin-top: 30px;
+  }
+  
+  .bot-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .bot-card {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .bot-card:hover {
+    background-color: #444;
+  }
+  
+  /* Responsive Styles for Larger Tablets and Laptops */
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 250px;
+    }
+  
+    .sidebar-header {
+      font-size: 20px;
+    }
+  
+    .chat-list li {
+      padding: 8px 0;
+    }
+  
+    .main-content {
+      padding: 15px;
+      margin-left: 250px;
+    }
+  
+    .header h1 {
+      font-size: 20px;
+    }
+  
+    .create-bot-btn {
+      padding: 6px 12px;
+    }
+  
+    .bot-card {
+      width: 90px;
+    }
+  }
+  
+  /* Responsive Styles for Mobile and Small Tablets */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      transform: translateX(-100%); /* Hidden by default */
+      position: fixed;
+      height: 100%;
+    }
+  
+    .sidebar.show {
+      transform: translateX(0); /* Show sidebar on toggle */
+    }
+  
+    .main-content {
+      margin-left: 0;
+      padding: 15px;
+    }
+  
+    .header h1 {
+      font-size: 18px;
+    }
+  
+    .create-bot-btn {
+      padding: 5px 10px;
+    }
+  
+    .bot-options {
+      gap: 5px;
+    }
+  
+    .bot-card {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  /* Responsive Styles for Small Mobile Devices */
+  @media (max-width: 480px) {
+    .header h1 {
+      font-size: 16px;
+    }
+  
+    .create-bot-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  
+    .bot-option {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  
+    .bot-card {
+      width: calc(100% - 10px);
+      font-size: 14px;
+    }
+  }
+  
+  /* Toggle Button for Sidebar */
+  .toggle-sidebar-btn {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+  }
+  
+  @media (max-width: 768px) {
+    .toggle-sidebar-btn {
+      display: block;
+    }
+  }
+  

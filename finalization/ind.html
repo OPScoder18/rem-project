@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poe Clone Interface</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1e;
+            color: white;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+         /* Sidebar styling */
+  .sidebar {
+    width: 60px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s;
+    overflow-y: auto;
+    padding-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Expanded sidebar */
+  .sidebar.active {
+    width: 250px;
+  }
+
+  /* Toggle button styling */
+  .toggle-button {
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    background-color:black;
+    color: #333;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: left 0.3s;
+  }
+
+  /* Move the toggle button inside the sidebar when active */
+  .sidebar.active + .toggle-button {
+    left: 200px;
+  }
+
+  /* Sidebar item styles */
+  .sidebar-item {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+   
+  }
+
+  /* Sidebar item styling when expanded */
+  .sidebar.active .sidebar-item span {
+    display: inline;
+  }
+
+  /* Hide text by default, show only when sidebar is expanded */
+  .sidebar-item span {
+    display: none;
+    margin-left: 10px;
+  }
+
+  /* Icon styling */
+  .sidebar-item img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* POE logo styling in sidebar */
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar-logo span {
+    display: none;
+  }
+
+  /* Show "POE" text in expanded sidebar */
+  .sidebar.active .sidebar-logo span {
+    display: inline;
+  }
+
+  /* Main content area styling */
+  .main-content {
+    margin-left: 70px;
+    padding: 20px;
+    flex-grow: 1;
+    transition: margin-left 0.3s;
+  }
+
+  .sidebar.active ~ .main-content {
+    margin-left: 250px;
+  }
+
+  /* Footer settings section in sidebar */
+  .sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    width: 100%;
+    visibility: hidden;
+   
+  }
+  .sidebar.active .sidebar-footer {
+    visibility: visible;
+  }
+
+  .sidebar-footer a {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+  }
+
+  .sidebar-footer .download-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+    width: 80%;
+  }
+
+
+        /* Main Content */
+        .main-content {
+            margin-left: 70px;
+            padding: 20px;
+            width: calc(100% - 70px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: margin-left 0.3s;
+        }
+
+        /* Logo and Chat Options */
+        .logo-section {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .logo-section img {
+            width: 100px;
+        }
+
+        .chat-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chat-options button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #3a3a3c;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .chat-options button img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .chat-options button:hover {
+            background-color: #5a5a5c;
+        }
+
+        /* Chat Input */
+        .chat-input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #2c2c2e;
+            border-radius: 25px;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+        }
+
+        .chat-input button {
+            background-color: #3a3a3c;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #5a5a5c;
+        }
+
+        /* Bot List Section */
+        .bot-list-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .bot-list-section h2 {
+            color: #a0a0a5;
+            margin-bottom: 10px;
+        }
+
+        .bot-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .bot-item {
+            background-color: #3a3a3c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 180px;
+            text-align: left;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .bot-item:hover {
+            transform: translateY(-5px);
+            background-color: #5a5a5c;
+        }
+
+        .bot-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .bot-item .bot-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bot-item h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .bot-item p {
+            font-size: 12px;
+            color: #a0a0a5;
+            margin-top: 2px;
+        }
+
+        /* Media Query for Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                position: absolute;
+                transition: width 0.3s;
+            }
+
+            .sidebar.expanded {
+                width: 200px;
+                z-index: 10;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .sidebar-toggle {
+                left: 10px;
+                z-index: 11;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <button class="toggle-button" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar" id="sidebar">
+        <!-- POE logo with text that shows when expanded -->
+        <div class="sidebar-logo">
+            <img src="robo.png" alt="Logo" style="height: 50px;">
+            <span>POE</span>
+        </div>
+        <div class="sidebar-row">
+            <a href="#" class="sidebar-item explore">
+                <img src="search1.png" alt="Explore Icon">
+                <div class="text-with-symbol">
+                    <span>Explore</span>
+                    <span class="symbol">&gt;</span> <!-- ">" symbol for Explore -->
+                </div>
+            </a>
+            <a href="#" class="sidebar-item create-bot">
+                <img src="bot2.png" alt="Create Icon">
+                <div class="text-with-symbol">
+                    <span>Create bot</span>
+                    <span class="symbol">+</span> <!-- "+" symbol for Create bot -->
+                </div>
+            </a>
+        </div>
+      
+        <!-- Sidebar items with icons on the left, text on the right -->
+        <a href="#" class="sidebar-item"><img src="msg.png" alt="Your bots Icon"><span>Your bots</span></a>
+        <a href="#" class="sidebar-item"><img src="more.png" alt="Creators Icon"><span>Creators</span></a>
+        <a href="#" class="sidebar-item"><img src="contact.png" alt="Profile Icon"><span>Profile</span></a>
+        <a href="#" class="sidebar-item"><img src="set.png" alt="Settings Icon"><span>Settings</span></a>
+        <a href="#" class="sidebar-item"><img src="feed.png" alt="Feedback Icon"><span>Send Feedback</span></a>
+
+        <!-- Footer settings section -->
+        <div class="sidebar-footer">
+            <div class="download-btn">Download iOS app</div>
+            <div class="download-btn">Download Android app</div>
+            <div class="download-btn">Download Windows app</div>
+            <div style="margin-top: 15px;">
+                <span>Follow us on</span>
+                <a href="#"><img src="https://via.placeholder.com/20" alt="X Icon"> X</a>
+                <a href="#"><img src="https://via.placeholder.com/20" alt="Discord Icon"> Discord</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="logo-section" style="padding-top:120px;">
+            <img src="Untitled-design-11-removebg-preview.png" alt="Poe Logo" style="height: 200px; width:200px">
+            <div class="chat-options">
+                <button>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSCkUQF39Cmikiywhvw17hQqBBNyPLBNeCOQ&s" alt="Assistant Icon">
+                    Assistant
+                </button>
+                <button>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png" alt="ChatGPT Icon">
+                    ChatGPT-4o-Latest
+                </button>
+                <button>
+                    <img src="https://i.pinimg.com/474x/b9/67/82/b96782d0ab0ea492dabcf4a0f00698d2.jpg" alt="Web-Search Icon">
+                    Web-Search
+                </button>
+                <button>
+                    <img src="https://www.svgrepo.com/show/135634/more.svg" alt="More Icon">
+                    More
+                </button>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Start a new chat">
+            <button>➤</button>
+        </div>
+
+        <div class="bot-list-section">
+            <h2>Official bots</h2>
+            <div class="bot-list">
+                <div class="bot-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSCkUQF39Cmikiywhvw17hQqBBNyPLBNeCOQ&s" alt="Bot 1">
+                    <div class="bot-info">
+                        <h3>Assistant</h3>
+                        <p>General-purpose assistant bot.</p>
+                    </div>
+                </div>
+                <div class="bot-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRda8uApwhmCz6ZcYFslpQyGGhEnRuLOOJMGQ&s" alt="Bot 2">
+                    <div class="bot-info">
+                        <h3>Claude-3.5</h3>
+                        <p>Anthropic’s friendly chatbot</p>
+                    </div>
+                </div>
+                <div class="bot-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png" alt="Bot 3">
+                    <div class="bot-info">
+                        <h3>ChatGPT-4</h3>
+                        <p>OpenAI’s advanced chatbot.</p>
+                    </div>
+                </div>
+                <div class="bot-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRda8uApwhmCz6ZcYFslpQyGGhEnRuLOOJMGQ&s" alt="Bot 4">
+                    <div class="bot-info">
+                        <h3>Claude-instant-100k</h3>
+                        <p>Anthropic’s quick-response bot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+            const toggleButton = document.querySelector('.toggle-button');
+            toggleButton.style.left = sidebar.classList.contains('active') ? "200px" : "70px";
+        }
+    </script>
+
+
+</body>
+</html>

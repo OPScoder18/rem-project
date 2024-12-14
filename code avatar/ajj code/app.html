@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clone Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Left Section */
+    .left-section {
+      flex: 1;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .left-section h1 {
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      width: 200px;
+      text-align: left;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Right Section */
+    .right-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #fff;
+    }
+
+    .right-section img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .right-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .input-group input {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-size: 18px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .btn {
+      background: #f00;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .timer {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    footer a {
+      color: #00f;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-section">
+    <h1>Layout Cards</h1>
+    <div class="cards">
+      <div class="card">
+        <img src="https://flagcdn.com/w40/sg.png" alt="Singapore Flag">
+        <h3>Singapore</h3>
+        <p>Head Office</p>
+        <p>XYZ Pvt. Ltd.<br>Road to nowhere, 06-404, 500 Internal Error</p>
+      </div>
+      <div class="card">
+        <img src="https://flagcdn.com/w40/hk.png" alt="Hong Kong Flag">
+        <h3>Hong Kong</h3>
+        <p>Branches</p>
+        <p>XYZ Pvt. Ltd.<br>The Infinite Loop Office, 404 Timeout Plaza</p>
+      </div>
+      <div class="card">
+        <img src="https://flagcdn.com/w40/us.png" alt="USA Flag">
+        <h3>USA</h3>
+        <p>Branches</p>
+        <p>XYZ Inc.<br>Nulltown, Buglandia, 500 0xDEADBEE</p>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <img src="https://via.placeholder.com/100x50.png?text=Logoipsum" alt="Logo">
+    <h2>Verify your Email</h2>
+    <p>Please enter the 6-digit code we just sent to <strong>s********@xyz.com</strong></p>
+    <div class="input-group">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <span>-</span>
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+    </div>
+    <button class="btn">Verify</button>
+    <p class="timer">Wait 1:39 seconds before requesting a new code.</p>
+    <footer>
+      By continuing, you're agreeing to Nobody's <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.
+    </footer>
+  </div>
+</body>
+</html>

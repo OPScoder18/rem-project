@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface Clone</title>
+  <style>
+    /* General reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Align content to the top */
+      background-color: #000;
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden; /* Prevent horizontal overflow */
+    }
+
+    /* Sidebar styling */
+    /* Sidebar styling */
+.sidebar {
+  width: 60px;
+  background-color: #1c1c1e;
+  color: #fff;
+  border-right: 1px solid #333;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s;
+  overflow: hidden; /* Changed from overflow-y: auto to overflow: hidden */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+    /* Expanded sidebar */
+    .sidebar.active {
+      width: 280px;
+    }
+
+    /* Sidebar logo */
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      
+      
+    }
+
+    .sidebar-logo img {
+      width: 60px;
+     
+    }
+
+    .sidebar-logo span {
+      display: none;
+    }
+
+    .sidebar.active .sidebar-logo span {
+      display: inline;
+    
+    }
+
+    /* Sidebar row (Explore and Create Bot) */
+    .sidebar-row {
+      display: flex;
+      flex-direction: column;
+      padding-top: 5px;
+    }
+
+    .sidebar.active .sidebar-row {
+      flex-direction: row;
+    }
+
+    .sidebar-row .sidebar-item {
+      justify-content: center;
+    }
+
+    .sidebar.active .sidebar-row .sidebar-item {
+      justify-content: flex-start;
+    }
+
+    .sidebar-item span {
+      display: none;
+    }
+
+    .sidebar.active .sidebar-item span {
+      display: inline;
+      margin-left: 10px;
+    }
+
+    /* Sidebar items */
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s;
+      flex-grow: 1;
+      justify-content: center;
+      /* Add padding for better touch targets */
+    }
+
+    .sidebar-item:hover {
+      background-color: #333;
+    }
+
+    .sidebar-item img {
+      width: 60px;/* Limit height to fit sidebar */
+    }
+
+    .sidebar.active .sidebar-item {
+      justify-content: flex-start;
+    }
+
+    .sidebar.active .sidebar-item img {
+      margin-left: 10px;
+    }
+
+    /* Footer in sidebar */
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid #555;
+      text-align: center;
+      visibility: hidden;
+    }
+
+    .sidebar.active .sidebar-footer {
+      visibility: visible;
+    }
+
+    .sidebar-footer .download-btn {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+      margin-top: 10px;
+      width: 100%;
+      background-color: #fff;
+      white-space: nowrap;
+    }
+
+    /* Toggle button styling */
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      left: 70px; /* Initially outside the sidebar */
+      background-color: transparent;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s; /* Smooth transition for left and top */
+    }
+
+    /* When the sidebar is active, move the toggle button inside */
+    .sidebar.active + .toggle-button {
+      left: 220px; /* Align with the "POE" text */
+      top: 3px; /* Align vertically with the logo */
+    }
+
+    /* Main content */
+    .main-content {
+     /* Adjust as needed */
+      margin-left: 70px;
+      padding-top: 170px;
+      width: calc(100% - 70px);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Centers content vertically and horizontally */
+      min-height: calc(100vh - 20px); /* Full height minus some padding */
+      margin-top: 0; /* Adjust as needed */
+      transition: margin-left 0.3s;
+    }
+    
+    .sidebar.active ~ .main-content {
+      margin-left: 280px;
+    }
+
+    /* Container in main content */
+    .container {
+      width: 80%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    /* Logo in main content */
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: -50px;
+      
+    }
+    
+/* Official Bot Section Styling */
+.official-bot-section {
+  display: flex;
+  justify-content: space-between; /* Space between text and the 'See All' link */
+  align-items: center;
+  margin-top: 80px;  /* Add top margin to separate it from the previous section */
+  margin-bottom: 5px; 
+  color:white; /* Space it from the bot section below */
+}
+
+.official-bot-section h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color:white;
+  margin-bottom: 5px;
+}
+
+
+.see-all-link {
+  font-size: 14px;
+  color: #007bff; /* Blue color for the link */
+  text-decoration: none;
+}
+
+.see-all-link:hover {
+  text-decoration: underline;
+}
+
+  
+
+    /* Bot buttons */
+    .bot-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .bot-button {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .bot-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .search-bar {
+      position: relative;
+      display: flex;
+      align-items: center; /* Ensures vertical alignment */
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 30px;
+      margin-left: 30px;
+     
+    }
+    
+    .search-bar input[type="text"] {
+      width: 100%;
+      padding: 10px 40px 10px 20px; /* Enough padding-right for the icon */
+      border-radius: 30px;
+      border: 2px solid #403e42;
+      background: transparent;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box; /* Ensures proper sizing of the input box */
+    }
+    
+    .search-bar .icon {
+      position: absolute;
+      right: 20px; /* Keeps the icon inside the box */
+      font-size: 20px;
+      color: #6200ee;
+      pointer-events: none; /* Prevents interaction */
+      display: flex; /* Centers the icon vertically */
+      align-items: center;
+      height: 100%; /* Ensures it aligns with the input field */
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .search-bar {
+        max-width: 100%; /* Take full width for smaller screens */
+      }
+    
+      .search-bar input[type="text"] {
+        padding-right: 40px; /* Adjust padding for smaller screens */
+      }
+    
+      .search-bar .icon {
+        right: 15px; /* Ensure it stays within the input */
+        font-size: 18px; /* Adjust size for smaller screens */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .search-bar input[type="text"] {
+        padding-right: 35px; /* Reduce padding for very small screens */
+      }
+    
+      .search-bar .icon {
+        right: 10px; /* Reduce right margin for tighter spaces */
+        font-size: 16px; /* Adjust icon size */
+      }
+    }
+    
+    /* Bots Section */
+    .bots-section {
+      display: flex;
+      flex-direction: flex-start; /* Stack rows vertically */
+      gap: 10px; 
+      /* Space between 
+      rows */
+    }
+
+    .bot-row {
+      display: flex;
+      justify-content: space-between; /* Space between bot cards */
+      flex-wrap: wrap;
+      gap:5px;
+
+    }
+
+    .bot-card {
+      display: flex;
+      align-items: center; /* Center align items */
+      gap: 5px; /* Space between image and text */
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid #3d3a3a;
+      background-color: transparent;
+      font-size: 12px;
+      overflow: auto;
+      color: white;
+      height: 150px;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 300px; /* Adjust width */
+      text-align: left; /* Align text to the left */
+    }
+    
+    .bot-card img {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0; /* Prevent the image from shrinking */
+      border-radius: 50%; /* Optional for a circular image */
+    }
+    
+    .bot-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px; /* Space between title and description */
+    }
+    
+
+    /* Default sidebar-row layout (horizontal) */
+.sidebar-row {
+  display: flex;
+  flex-direction: row; /* Default to horizontal layout */
+  gap: 10px; /* Space between items */
+}
+
+/* Stack items vertically on smaller screens */
+@media (max-width: 768px) {
+  .sidebar-row {
+    flex-direction: column; /* Change to vertical layout */
+    align-items: flex-start; /* Align items to the left */
+    gap: 20px; /* Add more space between items */
+  }
+
+  .sidebar-item {
+    justify-content: flex-start; /* Ensure proper alignment */
+  }
+}
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .sidebar.active {
+        width: 200px;
+      }
+    
+      
+
+      .toggle-button {
+        left: 70px;
+      }
+
+      .sidebar.active + .toggle-button {
+        left: 190px;
+      }
+
+      .main-content {
+        margin-left: 60px;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 210px;
+      }
+
+      .bot-button {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+
+    }
+
+    @media (max-width: 768px) {
+      .sidebar.active {
+        width: 180px;
+      }
+
+      .toggle-button {
+        left: 50px;
+      }
+
+      .sidebar.active + .toggle-button {
+        left: 170px;
+      }
+
+      .main-content {
+        margin-left: 60px;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 190px;
+      }
+
+      .bot-button {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+    }
+    @media (max-width: 768px) {
+      .bot-card {
+        flex: 0 1 calc(50% - 15px); /* Adjust for medium screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar.active {
+        width: 160px;
+      }
+
+      .toggle-button {
+        left: 50px;
+      }
+
+      .sidebar.active + .toggle-button {
+        left: 160px;
+      }
+
+      .main-content {
+        margin-left: 60px;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 170px;
+      }
+
+  
+      
+    }
+
+    @media (max-width: 480px) {
+      .bot-card {
+        flex: 0 1 calc(100% - 10px); /* Full width for small screens */
+      }
+    }
+    @media (max-width: 768px) {
+      .bots-section {
+        gap: 40px; /* Increase row gap for smaller screens */
+      }
+    
+      .bot-row {
+        gap: 30px; /* Increase gap between items */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .bots-section {
+        gap: 50px; /* Further increase row gap for very small screens */
+      }
+    
+      .bot-row {
+        gap: 40px; /* Further increase item gap */
+      }
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="robo.png" alt="Logo">
+    <span>POE</span>
+  </div>
+
+  <div class="sidebar-row">
+    <a href="#" class="sidebar-item explore">
+      <img src="search1.png" alt="Explore Icon">
+      <div class="divide">
+        <span>Explore</span>
+        <span class="symbol">&gt;</span>
+      </div>
+    </a>
+  
+    <a href="#" class="sidebar-item create-bot">
+      <img src="bot2.png" alt="Create Icon">
+      <div class="divide">
+        <span>Create bot</span>
+        <span class="symbol">+</span>
+      </div>
+    </a>
+  </div>
+  
+  
+  <a href="#" class="sidebar-item">
+    <img src="msg.png" alt="Your bots Icon">
+    <span>Your bots</span>
+  </a>
+  <a href="#" class="sidebar-item">
+    <img src="more.png" alt="More Icon">
+    <span>More</span>
+  </a>
+  <a href="#" class="sidebar-item">
+    <img src="build.png" alt="Creators Icon">
+    <span>Creators</span>
+  </a>
+  <a href="#" class="sidebar-item">
+    <img src="contact.png" alt="Profile Icon">
+    <span>Profile</span>
+  </a>
+  <a href="#" class="sidebar-item">
+    <img src="set.png" alt="Settings Icon">
+    <span>Settings</span>
+  </a>
+  <a href="#" class="sidebar-item">
+    <img src="feed.png" alt="Feedback Icon">
+    <span>Send Feedback</span>
+  </a>
+
+  <div class="sidebar-footer">
+    <div class="download-btn">Download iOS app</div>
+    <div class="download-btn">Download Android app</div>
+    <div class="download-btn">Download Windows app</div>
+    <div style="margin-top: 15px;">
+      <span>Follow us on</span>
+      <a href="#"><img src="https://via.placeholder.com/20" alt="X Icon"> X</a>
+      <a href="#"><img src="https://via.placeholder.com/20" alt="Discord Icon"> Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- Toggle button -->
+<button class="toggle-button" onclick="toggleSidebar()">☰</button>
+
+<div class="main-content">
+  <div class="container">
+    <div class="logo">
+      <img src="p.png" alt="Logo" style="width: 200px;height:200px">
+      
+    </div>
+
+    <div class="bot-buttons">
+      <div class="bot-button"><img src="https://static.gameloop.com/img/9825e6f744922ee9fb10b0d21b1a982a.png?imageMogr2/thumbnail/172.8x172.8/format/webp" alt="Assistant Icon"> Assistant</div>
+      <div class="bot-button"><img src="https://em360tech.com/sites/default/files/styles/cover_image/public/2024-01/what-is-poe-ai.jpeg.webp?itok=FZSEJA8W" alt="Web-Search Icon"> Web-Search</div>
+      <div class="bot-button"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZeapjn43YR23noDa4vVQLPq4eaeFEU65viQ&s0" alt="Claude Icon"> Claude-3.5-Sonnet</div>
+      <div class="bot-button"><img src="more2.png" alt="More Icon"> More</div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Start a new chat">
+      <span class="icon">➔</span>
+    </div>
+
+      <div class="official-bot-section">
+      <h2>Official Bot</h2>
+      <a href="#" class="see-all-link" id="see-all-link">See All</a>
+
+    </div>
+
+    <div class="bots-section">
+      <div class="bot-row">
+        <div class="bot-card">
+          <img src="assist.png" alt="Assistant Icon">
+          <div class="bot-card-content">
+          <h3>Assistant </h3>
+          <p>General-purpose assistant bot. For queries requiring up-to-date information.</p>
+        </div>
+      </div>
+        <div class="bot-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZeapjn43YR23noDa4vVQLPq4eaeFEU65viQ&s0"  alt="Assistant Icon">
+          <div class="bot-card-content">
+          <h3>Claude-3.5</h3>
+        
+          <p>Anthropic's most powerful model, perfect for complex queries.</p>
+        </div>
+        
+      </div>
+        <div class="bot-card">
+          <img src="https://i.tribune.com.pk/media/images/XAI1723879685-0/XAI1723879685-0.jpg" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Grok-beta</h3>
+            <p>An early preview of xAI's most intelligent language model.</p>
+          </div>
+      </div>
+        <div class="bot-card">
+          <img src="ilama.png" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Llama-3.1-405B</h3>
+        <p>The pinnacle of Meta's Llama 3.1 open-source language models.</p>
+      </div></div>
+      </div>
+      <div class="bot-row">
+       
+        <div class="bot-card">
+          <img src="https://em360tech.com/sites/default/files/styles/cover_image/public/2024-01/what-is-poe-ai.jpeg.webp?itok=FZSEJA8W" alt="Web-Search Icon" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Web-Search</h3>
+        <p>Web-enabled assistant bot that searches the internet for answers.</p>
+      </div>
+        </div>
+        <div class="bot-card">
+          <img src="https://www.imagescreations.fr/wp-content/uploads/GPT-4o.webp" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>GPT-4o</h3>
+            <p>OpenAI's most powerful model. Stronger than GPT-3.5 for advanced tasks.</p>
+          </div>
+        </div>
+        <div class="bot-card">
+          <img src="mini.png" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>o1-mini</h3>
+            <p>A faster, cheaper version of OpenAI's advanced models.</p>
+          </div>
+        </div>
+        <div class="bot-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWw6ciJjXiJhpr3MG3zD8_uXLqV4Z_GAWkrw&s" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Gemini-1.5-Pro</h3>
+            <p>Powered by gemini-1.5-pro-002. The multi-modal model for diverse tasks.</p>
+          </div></div>
+      </div>
+      
+      <div class="bot-row" id="extra-assistants" style="display: none;">
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+          <strong>Assistant 9</strong>
+          <p>Specialized assistant bot.</p>
+        </div>
+        </div>
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+          <strong>Assistant 10</strong>
+          <p>Specialized assistant bot.
+            
+          </p>
+        </div>
+        </div>
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+          <strong>Assistant 11</strong>
+          <p>Specialized assistant bot.</p>
+        </div>
+        </div>
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+          <strong>Assistant 12</strong>
+          <p>Specialized assistant bot.</p>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+  }
+
+  window.addEventListener('resize', function () {
+    const sidebarRow = document.querySelector('.sidebar-row');
+    if (window.innerWidth <= 768) {
+      sidebarRow.style.flexDirection = 'column';
+    } else {
+      sidebarRow.style.flexDirection = 'row';
+    }
+  });
+
+  document.getElementById("see-all-link").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+
+    const extraAssistants = document.getElementById("extra-assistants");
+    const seeAllLink = document.getElementById("see-all-link");
+
+    if (extraAssistants.style.display === "none") {
+      // Show Assistants 9-12
+      extraAssistants.style.display = "flex";
+      seeAllLink.textContent = "See Less"; // Change link text
+    } else {
+      // Hide Assistants 9-12
+      extraAssistants.style.display = "none";
+      seeAllLink.textContent = "See All"; // Change link text back
+    }
+  });
+
+  // Initialize for the correct flex direction on load
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebarRow = document.querySelector('.sidebar-row');
+    if (window.innerWidth <= 768) {
+      sidebarRow.style.flexDirection = 'column';
+    } else {
+      sidebarRow.style.flexDirection = 'row';
+    }
+  });
+</script>
+
+
+</body>
+</html>

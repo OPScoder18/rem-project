@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Section Interface</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .bot-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .bot-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .bot-card:hover {
+      transform: scale(1.05);
+    }
+
+    .bot-icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .bot-info {
+      flex: 1;
+    }
+
+    .bot-info h3 {
+      font-size: 1.1rem;
+      margin: 5px 0;
+    }
+
+    .bot-info p {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      margin: 0;
+    }
+
+    .see-all {
+      text-align: right;
+      margin-top: -10px;
+    }
+
+    .see-all a {
+      color: #42a5f5;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .see-all a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Official Bots</h1>
+  <div class="see-all">
+    <a href="#">See all</a>
+  </div>
+  <div class="bot-container">
+    <div class="bot-card">
+      <img src="assistant-icon.png" alt="Assistant Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Assistant</h3>
+        <p>General-purpose assistant bot. For queries requiring up-to-date information.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="claude-icon.png" alt="Claude Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Claude-3.5</h3>
+        <p>Anthropic's most powerful model, perfect for complex queries.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="grok-icon.png" alt="Grok Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Grok-beta</h3>
+        <p>An early preview of xAI's most intelligent language model.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="llama-icon.png" alt="Llama Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Llama-3.1-405B</h3>
+        <p>The pinnacle of Meta's Llama 3.1 open-source language models.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="web-search-icon.png" alt="Web Search Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Web-Search</h3>
+        <p>Web-enabled assistant bot that searches the internet for answers.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="gpt-icon.png" alt="GPT Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>GPT-4o</h3>
+        <p>OpenAI's most powerful model. Stronger than GPT-3.5 for advanced tasks.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="o1-mini-icon.png" alt="o1-mini Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>o1-mini</h3>
+        <p>A faster, cheaper version of OpenAI's advanced models.</p>
+      </div>
+    </div>
+    <div class="bot-card">
+      <img src="gemini-icon.png" alt="Gemini Icon" class="bot-icon">
+      <div class="bot-info">
+        <h3>Gemini-1.5-Pro</h3>
+        <p>Powered by gemini-1.5-pro-002. The multi-modal model for diverse tasks.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

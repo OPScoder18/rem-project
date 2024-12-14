@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface Clone</title>
+  <style>
+    /* General reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 60px;
+      background-color: #1c1c1e;
+      color: #fff;
+      border-right: 1px solid #333;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      transition: width 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Expanded sidebar */
+    .sidebar.active {
+      width: 280px;
+    }
+
+    /* Sidebar logo */
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .sidebar-logo img {
+      width: 60px;
+    }
+
+    .sidebar-logo span {
+      display: none;
+    }
+
+    .sidebar.active .sidebar-logo span {
+      display: inline;
+    }
+
+    /* Sidebar row (Explore and Create Bot) */
+    .sidebar-row {
+      display: flex;
+      flex-direction: column;
+      padding-top: 5px;
+    }
+
+    .sidebar.active .sidebar-row {
+      flex-direction: row;
+    }
+
+    .sidebar-item span {
+      display: none;
+    }
+
+    .sidebar.active .sidebar-item span {
+      display: inline;
+      margin-left: 10px;
+    }
+
+    /* Sidebar items */
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s;
+      justify-content: center;
+    }
+
+    .sidebar-item:hover {
+      background-color: #333;
+    }
+
+    .sidebar-item img {
+      width: 60px;
+    }
+
+    .sidebar.active .sidebar-item {
+      justify-content: flex-start;
+    }
+
+    .sidebar.active .sidebar-item img {
+      margin-left: 10px;
+    }
+
+    /* Footer in sidebar */
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid #555;
+      text-align: center;
+      visibility: hidden;
+    }
+
+    .sidebar.active .sidebar-footer {
+      visibility: visible;
+    }
+
+    .sidebar-footer .download-btn {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      color: #333;
+      margin-top: 10px;
+      width: 100%;
+      background-color: #fff;
+      white-space: nowrap;
+    }
+
+    /* Toggle button styling */
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      left: 70px;
+      background-color: transparent;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .sidebar.active + .toggle-button {
+      left: 220px;
+      top: 3px;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: 70px;
+      padding-top: 170px;
+      width: calc(100% - 70px);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 20px);
+      margin-top: 0;
+      transition: margin-left 0.3s;
+    }
+
+    .sidebar.active ~ .main-content {
+      margin-left: 280px;
+    }
+
+    /* Bot buttons */
+    .bot-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .bot-button {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .bot-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Bots Section */
+    .bots-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 5px;
+    }
+
+    .bot-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .bot-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #222;
+      color: white;
+      width: 220px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .bot-card img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .bot-card-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bot-card-content h3 {
+      font-size: 1em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .bot-card-content p {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .bots-section {
+        gap: 40px;
+      }
+
+      .bot-row {
+        gap: 30px;
+      }
+
+      .sidebar.active {
+        width: 180px;
+      }
+
+      .toggle-button {
+        left: 50px;
+      }
+
+      .sidebar.active + .toggle-button {
+        left: 170px;
+      }
+
+      .main-content {
+        margin-left: 60px;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 190px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bot-card {
+        flex: 0 1 calc(100% - 10px);
+      }
+
+      .sidebar.active {
+        width: 160px;
+      }
+
+      .toggle-button {
+        left: 50px;
+      }
+
+      .sidebar.active + .toggle-button {
+        left: 160px;
+      }
+
+      .main-content {
+        margin-left: 60px;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="robo.png" alt="Logo">
+    <span>POE</span>
+  </div>
+
+  <div class="sidebar-row">
+    <a href="#" class="sidebar-item explore">
+      <img src="search1.png" alt="Explore Icon">
+      <span>Explore</span>
+    </a>
+  
+    <a href="#" class="sidebar-item create-bot">
+      <img src="bot2.png" alt="Create Icon">
+      <span>Create bot</span>
+    </a>
+  </div>
+
+  <a href="#" class="sidebar-item">
+    <img src="msg.png" alt="Your bots Icon">
+    <span>Your bots</span>
+  </a>
+
+  <div class="sidebar-footer">
+    <div class="download-btn">Download iOS app</div>
+    <div class="download-btn">Download Android app</div>
+  </div>
+</div>
+
+<!-- Toggle button -->
+<button class="toggle-button" onclick="toggleSidebar()">☰</button>
+
+<div class="main-content">
+  <div class="container">
+    <div class="bot-buttons">
+      <div class="bot-button"><img src="https://static.gameloop.com/img/9825e6f744922ee9fb10b0d21b1a982a.png" alt="Assistant Icon"> Assistant</div>
+      <div class="bot-button"><img src="https://em360tech.com/sites/default/files/styles/cover_image/public/2024-01/what-is-poe-ai.jpeg.webp" alt="Web-Search Icon"> Web-Search</div>
+      <div class="bot-button"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZeapjn43YR23noDa4vVQLPq4eaeFEU65viQ" alt="Claude Icon"> Claude-3.5-Sonnet</div>
+    </div>
+
+    <div class="bots-section">
+      <div class="bot-row">
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Assistant 1</h3>
+            <p>General-purpose assistant bot.</p>
+          </div>
+        </div>
+
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Assistant 2</h3>
+            <p>General-purpose assistant bot.</p>
+          </div>
+        </div>
+
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Assistant 3</h3>
+            <p>General-purpose assistant bot.</p>
+          </div>
+        </div>
+
+        <div class="bot-card">
+          <img src="https://via.placeholder.com/40" alt="Assistant Icon">
+          <div class="bot-card-content">
+            <h3>Assistant 4</h3>
+            <p>General-purpose assistant bot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad, #f39c12);
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            width: 70%;
+            background: #ffffff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex: 1;
+            background: linear-gradient(135deg, #6a1b9a, #ff8a65);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            width: 80%;
+            color: #fff;
+        }
+
+        .card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-section h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: #e74c3c;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .timer {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+
+        .footer a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="card">
+                <h3>Singapore</h3>
+                <p>Head Office</p>
+                <p>XYZ Pvt. Ltd.</p>
+                <p>Road to nowhere, 06-404, 500 Internal Error</p>
+            </div>
+            <div class="card">
+                <h3>Hong Kong</h3>
+                <p>Branches</p>
+                <p>XYZ Pte. Ltd.</p>
+                <p>The Infinite Loop Office, 404 Timeout Plaza</p>
+            </div>
+            <div class="card">
+                <h3>USA</h3>
+                <p>Branches</p>
+                <p>XYZ Inc.</p>
+                <p>Nulltown, Buglandia, 500 0xDEADBEE</p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <h1>Verify Your Email</h1>
+            <p>Please enter the 6-digit code we just sent to <strong>s********a@xyz.com</strong></p>
+
+            <div class="input-group">
+                <input type="text" maxlength="1">
+                <input type="text" maxlength="1">
+                <input type="text" maxlength="1">
+                <input type="text" maxlength="1">
+                <input type="text" maxlength="1">
+                <input type="text" maxlength="1">
+            </div>
+
+            <button class="btn" disabled>Verify</button>
+            <p class="timer">Wait 1:39 seconds before requesting a new code.</p>
+
+            <div class="footer">
+                By continuing, you’re agreeing to Nobody’s <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

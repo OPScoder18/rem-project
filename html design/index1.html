@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatIQ - Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background Gradient */
+        body {
+            background: linear-gradient(135deg, #d9a7c7, #fffcdc);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1em;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 400px;
+            background: #fff;
+            padding: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url('https://via.placeholder.com/40') center/cover;
+        }
+
+        .icons {
+            display: flex;
+            gap: 0.5em;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        /* Greeting */
+        .greeting h1 {
+            font-size: 1.5em;
+            margin-bottom: 0.2em;
+        }
+
+        .greeting p {
+            color: #777;
+            margin-bottom: 1em;
+        }
+
+        /* Chat History */
+        .chat-history {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5em;
+            margin-bottom: 1.5em;
+        }
+
+        .chat-item {
+            background-color: #f0f0f0;
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .see-all {
+            margin-left: auto;
+            font-size: 0.85em;
+            color: #888;
+            cursor: pointer;
+        }
+
+        /* Main Actions */
+        .actions {
+            display: flex;
+            gap: 0.5em;
+        }
+
+        .action {
+            flex: 1;
+            padding: 1.5em 1em;
+            border-radius: 15px;
+            color: #fff;
+            text-align: center;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .action-voice {
+            background-color: #d6bbfc;
+        }
+
+        .action-new {
+            background-color: #fcbbd6;
+        }
+
+        .action-search {
+            background-color: #333;
+        }
+
+        /* Footer Input */
+        .footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            margin-top: 1.5em;
+        }
+
+        .footer input {
+            flex: 1;
+            padding: 0.8em;
+            border: none;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            font-size: 0.9em;
+            outline: none;
+        }
+
+        .send-button {
+            background-color: #333;
+            color: #fff;
+            padding: 0.7em 1em;
+            border-radius: 50%;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1em;
+            }
+
+            .greeting h1 {
+                font-size: 1.3em;
+            }
+
+            .chat-item {
+                font-size: 0.85em;
+            }
+
+            .action {
+                padding: 1em;
+                font-size: 0.9em;
+            }
+
+            .footer input {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="profile-pic"></div>
+            <div class="icons">
+                <div class="icon">🔔</div>
+                <div class="icon">☰</div>
+            </div>
+        </div>
+
+        <!-- Greeting -->
+        <div class="greeting">
+            <h1>Hey, Cameron!</h1>
+            <p>What can I do for you?</p>
+        </div>
+
+        <!-- Chat History -->
+        <div class="chat-history">
+            <span class="see-all">See all</span>
+            <div class="chat-item">What is a wild animal?</div>
+            <div class="chat-item">Give an example for UI/UX</div>
+            <div class="chat-item">Meaning of white rose</div>
+            <div class="chat-item">Illustrator</div>
+            <div class="chat-item">UI/UX</div>
+            <div class="chat-item">Sport</div>
+            <div class="chat-item">What is React?</div>
+            <div class="chat-item">Graphics Design</div>
+        </div>
+
+        <!-- Main Actions -->
+        <div class="actions">
+            <div class="action action-voice">🎤 Talk with Wade Williamson</div>
+            <div class="action action-new">➕ New Chat</div>
+            <div class="action action-search">🔍 Search by image</div>
+        </div>
+
+        <!-- Footer Input -->
+        <div class="footer">
+            <input type="text" placeholder="Ask anything here...">
+            <div class="send-button">➤</div>
+        </div>
+    </div>
+</body>
+</html>

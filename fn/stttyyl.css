@@ -1,0 +1,279 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+  /* Main container */
+  .container {
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    width: 60px;
+    background-color: #000;
+    color: #fff;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s;
+    overflow-y: auto;
+    padding-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Expanded sidebar */
+  .sidebar.active {
+    width: 250px;
+  }
+  
+  /* Toggle button styling */
+  .toggle-button {
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: left 0.3s;
+  }
+  
+  /* Move the toggle button inside the sidebar when active */
+  .sidebar.active + .toggle-button {
+    left: 200px;
+  }
+  
+  /* Sidebar item styles */
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    border-bottom: 1px solid #555;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    justify-content: flex-start;
+  }
+  
+  /* Image (icon) on the left and text on the right */
+  .sidebar-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .sidebar-item span {
+    display: inline-block;
+  }
+  
+  /* Adjust layout when sidebar is expanded */
+  .sidebar.active .sidebar-item {
+    justify-content: flex-start;
+  }
+  
+  /* Special styling for 'Create Bot' and 'Explore' buttons */
+  .sidebar-item.create-bot,
+  .sidebar-item.explore {
+    justify-content: center;
+  }
+  
+  .sidebar-item.create-bot img,
+  .sidebar-item.explore img {
+    margin: 0;
+  }
+  
+  .sidebar-item.create-bot span,
+  .sidebar-item.explore span {
+    display: none;
+  }
+  
+  .sidebar.active .sidebar-item.create-bot span,
+  .sidebar.active .sidebar-item.explore span {
+    display: inline-block;
+  }
+  
+  /* Logo styling */
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sidebar-logo img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sidebar-logo span {
+    display: none;
+  }
+  
+  .sidebar.active .sidebar-logo span {
+    display: inline-block;
+  }
+  
+  /* Main content area styling */
+  .main-content {
+    margin-left: 70px;
+    padding: 20px;
+    flex-grow: 1;
+    transition: margin-left 0.3s;
+  }
+  
+  .sidebar.active ~ .main-content {
+    margin-left: 250px;
+  }
+  
+  /* Footer settings section in sidebar */
+  .sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #555;
+    text-align: center;
+    width: 100%;
+    visibility: hidden;
+  }
+  
+  .sidebar.active .sidebar-footer {
+    visibility: visible;
+  }
+  
+  .sidebar-footer a {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar-footer .download-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+    width: 80%;
+    background-color: #fff;
+  }
+  
+  /* Other sections as provided in the main content */
+  .logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .bot-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .bot-button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .bot-button img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .search-bar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .search-bar input[type="text"] {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 2px solid #6200ee;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .search-bar .icon {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #6200ee;
+    cursor: pointer;
+  }
+  
+  .bots-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .bot-card {
+    width: 140px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bot-card img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  

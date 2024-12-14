@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+    <form>
+        Name: <input type="text" id="first" placeholder="Enter your name">
+        Grade: <input type="text" id="second" placeholder="Enter your grade">
+        <input type="button" value="Submit" onclick="BPS()">
+    </form>
+    <script>
+        function BPS() {
+            let n = document.getElementById("first").value.trim();
+            let g = document.getElementById("second").value.trim();
+            if (n === "" || g === "") {
+                alert("This field is required");
+            } else {
+                alert("Submitted successfully");
+            }
+        }
+    </script>
+</body>
+</html>

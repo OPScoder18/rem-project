@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface Clone</title>
+  <style>
+    /* General reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* Main container */
+    .container {
+      width: 80%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 60px;
+      background-color: #000;
+      color: #fff;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      transition: width 0.3s;
+      overflow-y: auto;
+      padding-top: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Expanded sidebar */
+    .sidebar.active {
+      width: 250px;
+    }
+
+    /* Toggle button styling */
+    .toggle-button {
+      position: absolute;
+      top: 20px;
+      left: 70px;
+      background-color: transparent;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: left 0.3s;
+    }
+
+    /* Move the toggle button inside the sidebar when active */
+    .sidebar.active + .toggle-button {
+      left: 200px;
+    }
+
+    /* Sidebar row with Explore and Create Bot buttons */
+    .sidebar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 10px; /* Add some padding for spacing */
+    }
+
+    .sidebar-item.explore, 
+    .sidebar-item.create-bot {
+      flex: 1; /* Ensure both buttons take equal space */
+      display: flex;
+      justify-content: center;
+      padding: 15px 10px; /* Adjust padding for proper alignment */
+    }
+
+    .sidebar-item.explore img,
+    .sidebar-item.create-bot img {
+      margin-right: 10px; /* Ensure some spacing between icon and text */
+    }
+
+    .sidebar.active .sidebar-item.explore span,
+    .sidebar.active .sidebar-item.create-bot span {
+      display: inline-block;
+    }
+
+    /* Sidebar item styles */
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      color: #fff;
+      border-bottom: 1px solid #555;
+      text-decoration: none;
+      width: 100%;
+      cursor: pointer;
+      justify-content: flex-start;
+    }
+
+    .sidebar-item img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+
+    .sidebar-item span {
+      display: inline-block;
+    }
+
+    /* Main content area styling */
+    .main-content {
+      margin-left: 70px;
+      padding: 20px;
+      flex-grow: 1;
+      transition: margin-left 0.3s;
+    }
+
+    .sidebar.active ~ .main-content {
+      margin-left: 250px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <!-- POE logo with text that shows when expanded -->
+  <div class="sidebar-logo">
+    <img src="https://via.placeholder.com/40" alt="Logo">
+    <span>POE</span>
+  </div>
+  
+  <!-- Row with Explore and Create Bot buttons -->
+  <div class="sidebar-row">
+    <a href="#" class="sidebar-item explore">
+      <img src="https://via.placeholder.com/24" alt="Explore Icon">
+      <span>Explore</span>
+      <span class="symbol">&gt;</span> <!-- ">" symbol for Explore -->
+    </a>
+    
+    <a href="#" class="sidebar-item create-bot">
+      <img src="https://via.placeholder.com/24" alt="Create Icon">
+      <span>Create bot</span>
+      <span class="symbol">+</span> <!-- "+" symbol for Create bot -->
+    </a>
+  </div>
+
+  <!-- Sidebar items with icons on the left, text on the right -->
+  <a href="#" class="sidebar-item"><img src="https://via.placeholder.com/24" alt="Your bots Icon"><span>Your bots</span></a>
+  <a href="#" class="sidebar-item"><img src="https://via.placeholder.com/24" alt="Creators Icon"><span>Creators</span></a>
+  <a href="#" class="sidebar-item"><img src="https://via.placeholder.com/24" alt="Profile Icon"><span>Profile</span></a>
+  <a href="#" class="sidebar-item"><img src="https://via.placeholder.com/24" alt="Settings Icon"><span>Settings</span></a>
+  <a href="#" class="sidebar-item"><img src="https://via.placeholder.com/24" alt="Feedback Icon"><span>Send Feedback</span></a>
+
+  <!-- Footer settings section -->
+  <div class="sidebar-footer ">
+    <div class="download-btn">Download iOS app</div>
+    <div class="download-btn">Download Android app</div>
+    <div class="download-btn">Download Windows app</div>
+    <div style="margin-top: 15px;">
+      <span>Follow us on</span>
+      <a href="#"><img src="https://via.placeholder.com/20" alt="X Icon"> X</a>
+      <a href="#"><img src="https://via.placeholder.com/20" alt="Discord Icon"> Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- Toggle button -->
+<button class="toggle-button" onclick="toggleSidebar()">☰</button>
+
+<!-- Main content -->
+<div class="main-content">
+  <div class="container">
+    <div class="logo">
+      <img src="https://via.placeholder.com/50" alt="Logo">
+      <span>Poe</span>
+    </div>
+
+    <div class="bot-buttons">
+      <div class="bot-button"><img src="https://via.placeholder.com/20" alt="Assistant Icon"> Assistant</div>
+      <div class="bot-button"><img src="https://via.placeholder.com/20" alt="Web-Search Icon"> Web-Search</div>
+      <div class="bot-button"><img src="https://via.placeholder.com/20" alt="Claude Icon"> Claude-3.5-Sonnet</div>
+      <div class="bot-button"><img src="https://via.placeholder.com/20" alt="More Icon"> More</div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Start a new chat">
+      <span class="icon">➔</span>
+    </div>
+
+    <div class="bots-section">
+      <div class="bot-card"><img src="https://via.placeholder.com/40" alt="Assistant Icon"><strong>Assistant</strong><p>General-purpose assistant bot.</p></div>
+      <!-- Add more bot cards as needed -->
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+    const toggleButton = document.querySelector('.toggle-button');
+    toggleButton.style.left = sidebar.classList.contains('active') ? "200px" : "70px";
+  }
+</script>
+
+</body>
+</html>

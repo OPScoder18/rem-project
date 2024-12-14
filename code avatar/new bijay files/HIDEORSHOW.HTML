@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example of jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#sh").click(function() {
+                $(".content").show();
+            });
+            $("#hi").click(function() {
+                $(".content").hide(); 
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="Show" id="sh">
+    <input type="button" value="Hide" id="hi">
+    <p class="content" style="display: none;">Welcome to our page</p>
+</body>
+</html>
